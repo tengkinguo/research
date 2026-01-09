@@ -1,722 +1,346 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<!doctype html> <html lang="zh-CN"> <head> <meta charset="utf-8" /> <title>AI 学习与研究 · 静态指南页</title> <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- 使用 Tailwind CDN，避免额外本地文件 --> <script src="https://cdn.tailwindcss.com"></script> <meta name="description" content="一个用于 AI 学习与研究规划的静态单页，包括学习路径、资源导航、研究方向与实战建议。" /> </head> <body class="min-h-screen bg-slate-950 text-slate-50"> <div class="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 md:py-12 lg:py-16"> <!-- Hero Section --> <header class="grid gap-8 md:grid-cols-[3fr,2fr] md:items-center"> <div class="space-y-6"> <p class="inline-flex items-center rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur" > AI Study • Research Notes • Static Layout </p> <div class="space-y-3"> <h1 class="bg-gradient-to-r from-sky-400 via-cyan-300 to-emerald-300 bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl lg:text-5xl" > AI 学习与研究·静态指南页 </h1> <p class="max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base"> 这是一个专门用于 <span class="font-semibold text-sky-300"> AI 学习与研究规划</span> 的静态页面。内容围绕基础知识、进阶方向、资源导航和学习建议进行整理，适合作为个人学习入口页或备忘页。 </p> </div> <div class="grid gap-4 text-sm text-slate-200 sm:grid-cols-3"> <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-3"> <div class="text-xs font-medium text-slate-400">学习阶段</div> <div class="mt-1 text-base font-semibold">基础 → 进阶 → 研究</div> </div> <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-3"> <div class="text-xs font-medium text-slate-400">核心方向</div> <div class="mt-1 text-base font-semibold">ML / DL / LLM / 应用</div> </div> <div class="rounded-xl border border-slate-800 bg-slate-900/60 p-3"> <div class="text-xs font-medium text-slate-400">页面性质</div> <div class="mt-1 text-base font-semibold">纯静态 · 无交互逻辑</div> </div> </div> </div> <div class="relative h-40 overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-br from-sky-500/10 via-cyan-400/5 to-emerald-400/10 shadow-lg sm:h-56 md:h-64" > <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_55%),_radial-gradient(circle_at_bottom,_rgba(45,212,191,0.22),_transparent_55%)]" ></div> <div class="relative flex h-full flex-col justify-between p-4 sm:p-5"> <div> <p class="text-xs font-medium uppercase tracking-[0.18em] text-sky-300/80"> AI STUDY MAP </p> <p class="mt-2 max-w-[14rem] text-xs text-slate-100/90 sm:text-sm"> 用一个页面，概览 AI 学习路径、研究方向与高质量资源入口。 </p> </div> <div class="flex items-end justify-between gap-4"> <div class="space-y-1 text-xs text-slate-200/90"> <p>· 数学与基础理论</p> <p>· 机器学习 / 深度学习</p> <p>· 大模型与实践应用</p> </div> <img src="https://pub-cdn.sider.ai/u/U005HXWG9EK/web-coder/6960a8a300a62161998adfe6/resource/dfebf1d3-41e5-419f-9da9-ca430f9a9b9c.jpg" alt="AI research illustration" class="hidden h-24 w-24 rounded-xl object-cover ring-2 ring-sky-400/60 sm:block" /> </div> </div> </div> </header>
+  <!-- Quick Navigation -->
+  <nav
+    aria-label="Section navigation"
+    class="rounded-2xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-sm text-slate-100 shadow-sm sm:px-5 sm:py-4"
+  >
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
+        快速跳转
+      </span>
+      <div class="flex flex-wrap gap-2 text-xs sm:text-sm">
+        <a
+          href="#roadmap"
+          class="rounded-full bg-slate-800 px-3 py-1 text-sky-200 hover:bg-slate-700 hover:text-sky-100"
+        >
+          学习路径
+        </a>
+        <a
+          href="#resources"
+          class="rounded-full bg-slate-800 px-3 py-1 text-emerald-200 hover:bg-slate-700 hover:text-emerald-100"
+        >
+          资源导航
+        </a>
+        <a
+          href="#research"
+          class="rounded-full bg-slate-800 px-3 py-1 text-indigo-200 hover:bg-slate-700 hover:text-indigo-100"
+        >
+          研究方向
+        </a>
+        <a
+          href="#practice"
+          class="rounded-full bg-slate-800 px-3 py-1 text-amber-200 hover:bg-slate-700 hover:text-amber-100"
+        >
+          实战建议
+        </a>
+        <a
+          href="#workflow"
+          class="rounded-full bg-slate-800 px-3 py-1 text-pink-200 hover:bg-slate-700 hover:text-pink-100"
+        >
+          学习流程
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Learning Roadmap -->
+  <section id="roadmap" class="space-y-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-50 sm:text-2xl">
+          AI 学习路径概览
+        </h2>
+        <p class="mt-1 text-sm text-slate-300">
+          从零基础到研究实践的一个可能路线，仅供参考，可根据个人背景调整顺序与深度。
+        </p>
+      </div>
+      <span class="text-xs font-medium text-slate-400">
+        建议：至少完整走完一个路径，再横向扩展
+      </span>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-sky-200">阶段 1 · 基础入门</h3>
+        <p class="mt-1 text-xs text-slate-300">
+          目标：理解 AI / ML 的基本概念与常见术语，建立整体认知。
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-4 text-xs text-slate-200">
+          <li>了解 AI、机器学习、深度学习、LLM 的区别与联系</li>
+          <li>熟悉 Python 基础语法与常用库（NumPy / Pandas / Matplotlib）</li>
+          <li>浏览一门机器学习入门课程的大纲，形成知识地图</li>
+        </ul>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-emerald-200">阶段 2 · 数学基础</h3>
+        <p class="mt-1 text-xs text-slate-300">
+          目标：能够看懂主流教材中的数学符号与核心推导。
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-4 text-xs text-slate-200">
+          <li>线性代数：向量、矩阵、特征值、奇异值分解</li>
+          <li>概率统计：随机变量、分布、极大似然、贝叶斯公式</li>
+          <li>微积分：函数、导数、偏导、梯度下降的直观理解</li>
+        </ul>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-indigo-200">阶段 3 · 经典机器学习</h3>
+        <p class="mt-1 text-xs text-slate-300">
+          目标：掌握监督 / 非监督学习的基本方法及使用场景。
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-4 text-xs text-slate-200">
+          <li>线性回归、逻辑回归、决策树、随机森林、SVM</li>
+          <li>聚类（K-Means）与降维（PCA 等）</li>
+          <li>使用 scikit-learn 完成若干小项目（预测 / 分类 / 聚类）</li>
+        </ul>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-cyan-200">阶段 4 · 深度学习与表示学习</h3>
+        <p class="mt-1 text-xs text-slate-300">
+          目标：理解神经网络的基本结构与训练方法。
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-4 text-xs text-slate-200">
+          <li>前向传播 / 反向传播、损失函数与优化器</li>
+          <li>CNN、RNN、Attention、Transformer 等主流结构</li>
+          <li>使用 PyTorch / TensorFlow 复现经典模型（如 MNIST、文本分类）</li>
+        </ul>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-amber-200">
+          阶段 5 · 大模型与应用实践
+        </h3>
+        <p class="mt-1 text-xs text-slate-300">
+          目标：掌握 LLM 的基本原理与常见应用范式。
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-4 text-xs text-slate-200">
+          <li>理解 Transformer、预训练、微调、对齐等关键概念</li>
+          <li>熟悉 Prompt Engineering、RAG、工具调用、Agent 等模式</li>
+          <li>结合开源模型或 API 完成一个端到端的小项目</li>
+        </ul>
+      </article>
+
+      <article class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-pink-200">
+          阶段 6 · 论文阅读与研究实践
+        </h3>
+        <p class="mt-1 text-xs text-slate-300">
+          目标：能够独立阅读主流 AI 会议论文并尝试复现或改进。
+        </p>
+        <ul class="mt-3 list-disc space-y-1 pl-4 text-xs text-slate-200">
+          <li>选择 1~2 个细分方向，建立论文阅读清单</li>
+          <li>尝试代码复现与对比实验，记录实验日志</li>
+          <li>在公开仓库整理笔记与代码，形成个人研究档案</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources" class="space-y-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-50 sm:text-2xl">
+          AI 学习与研究资源导航
+        </h2>
+        <p class="mt-1 text-sm text-slate-300">
+          以下为常见的资源类别示例，可根据个人习惯补充或替换为你常用的网站与教材。
+        </p>
+      </div>
+    </div>
+
+    <div class="grid gap-4 lg:grid-cols-[2fr,2fr,1.5fr]">
+      <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-sky-200">公开课 / 视频课程</h3>
+        <ul class="mt-3 space-y-2 text-xs text-slate-200">
+          <li>
+            <span class="font-medium">机器学习入门：</span>
+            可选 Coursera、Udacity、B 站高校公开课等平台
+          </li>
+          <li>
+            <span class="font-medium">深度学习专题：</span>
+            选择一门系统课程，不必贪多，保证跟完做完作业
+          </li>
+          <li>
+            <span class="font-medium">数学补课：</span>
+            线代 / 概率统计 / 微积分，重点在于「看懂 + 会做关键习题」
+          </li>
+        </ul>
+      </article>
+
+      <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-emerald-200">书籍 / 论文 / 文档</h3>
+        <ul class="mt-3 space-y-2 text-xs text-slate-200">
+          <li>
+            <span class="font-medium">经典教材：</span>
+            例如机器学习、深度学习与概率论相关教材，择一两本精读
+          </li>
+          <li>
+            <span class="font-medium">论文检索：</span>
+            arXiv / OpenReview / 各大会官网（NeurIPS, ICML, ICLR, ACL 等）
+          </li>
+          <li>
+            <span class="font-medium">官方文档：</span>
+            PyTorch、TensorFlow、常用模型库与评测框架的官网文档
+          </li>
+        </ul>
+      </article>
+
+      <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-indigo-200">工具 / 平台示例</h3>
+        <ul class="mt-3 space-y-2 text-xs text-slate-200">
+          <li>代码托管与协作：GitHub / GitLab</li>
+          <li>实验记录：Jupyter Notebook / VS Code / Markdown + Git</li>
+          <li>计算资源：本地 GPU / 云平台 / 学校集群</li>
+          <li>阅读管理：Zotero / Notion / Obsidian / 飞书文档</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- Research Directions -->
+  <section id="research" class="space-y-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-50 sm:text-2xl">
+          常见 AI 研究方向速览
+        </h2>
+        <p class="mt-1 text-sm text-slate-300">
+          选择研究方向时，可从「应用场景」与「方法论」两个维度综合考虑，逐步形成自己的研究兴趣域。
+        </p>
+      </div>
+      <span class="text-xs font-medium text-slate-400">
+        建议：先广泛了解，再在 1~2 个方向上深入
+      </span>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-sky-200">按应用场景划分</h3>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            自然语言处理（NLP）
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            计算机视觉（CV）
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            语音与多模态
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            推荐系统 / 搜索引擎
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            医疗 / 金融 / 教育 AI
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            自动驾驶 / 机器人
+          </span>
         </div>
-    </header>
+      </article>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+      <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-emerald-200">按方法与理论划分</h3>
+        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            表示学习 / 预训练模型
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            强化学习 / 决策智能
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            生成模型（VAE / GAN / Diffusion）
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            大模型对齐 / 安全 / 可解释性
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            高效训练 / 模型压缩 / 部署
+          </span>
+          <span class="rounded-full bg-slate-800 px-3 py-1 text-slate-100">
+            评测方法与数据集构建
+          </span>
         </div>
-    </section>
+      </article>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Practice & Workflow -->
+  <section id="practice" class="space-y-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-50 sm:text-2xl">
+          实战建议与学习习惯
+        </h2>
+        <p class="mt-1 text-sm text-slate-300">
+          理论必须与实践结合，通过持续的小项目、复现与总结，逐步形成自己的知识体系。
+        </p>
+      </div>
+    </div>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="grid gap-4 lg:grid-cols-[2fr,1.5fr]">
+      <article class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-amber-200">实战与项目建议</h3>
+        <ol class="mt-3 list-decimal space-y-2 pl-4 text-xs text-slate-200">
+          <li>
+            <span class="font-medium">由小到大，逐步增加难度。</span>
+            从简单的分类 / 回归任务开始，慢慢尝试更复杂的数据与模型。
+          </li>
+          <li>
+            <span class="font-medium">保证每个项目都可复现。</span>
+            清晰记录依赖环境、数据来源、训练参数和评测指标。
+          </li>
+          <li>
+            <span class="font-medium">建立统一的笔记与代码仓库。</span>
+            为每个项目写一份 README，简要说明问题背景、方法与结论。
+          </li>
+          <li>
+            <span class="font-medium">定期回顾总结。</span>
+            每 1~2 个月整理一次「学到了什么、还不清楚什么、下一步计划是什么」。
+          </li>
+          <li>
+            <span class="font-medium">适度阅读开源项目。</span>
+            选择少数高质量仓库深入阅读，而不是广泛但浅尝辄止。
+          </li>
+        </ol>
+      </article>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+      <article id="workflow" class="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+        <h3 class="text-sm font-semibold text-sky-200">日常学习流程示例</h3>
+        <ul class="mt-3 space-y-2 text-xs text-slate-200">
+          <li>
+            <span class="font-semibold text-sky-200">Step 1 · 输入：</span>
+            视频 / 教材 / 论文，控制在可消化的篇幅
+          </li>
+          <li>
+            <span class="font-semibold text-sky-200">Step 2 · 输出：</span>
+            将新知识转化为自己的语言，用图示或小结说明
+          </li>
+          <li>
+            <span class="font-semibold text-sky-200">Step 3 · 实践：</span>
+            用代码或实验来验证理解，不要求复杂，但要完整可运行
+          </li>
+          <li>
+            <span class="font-semibold text-sky-200">Step 4 · 记录：</span>
+            将关键发现、坑点和思考写入统一笔记系统
+          </li>
+          <li>
+            <span class="font-semibold text-sky-200">Step 5 · 分享：</span>
+            选择适合的渠道对外分享，倒逼自己讲清楚问题与答案
+          </li>
+        </ul>
+      </article>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+  <!-- Footer Note -->
+  <footer class="border-t border-slate-800 pt-4 text-xs text-slate-500">
+    <p>
+      本页面为
+      <span class="font-medium text-slate-300"> 静态 AI 学习 / 研究规划页 </span>
+      示例，可根据个人需求修改内容、添加链接或导出为独立 HTML 使用。
+    </p>
+  </footer>
+</div>
